@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="狀態：未連線"
-                android:textColor="#FF5722"
+                android:textColor="#BF360C"
                 android:textSize="16sp"
                 android:padding="8dp"
                 android:background="#EEEEEE"
