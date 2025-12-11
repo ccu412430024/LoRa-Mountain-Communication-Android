@@ -24,7 +24,7 @@
 ## 📸 應用截圖 (Screenshots)
 | 裝置掃描 | 參數設定頁面 |
 |:---:|:---:|
-| ![Scan](images/screenshot_scan.png) | ![Config](images/screenshot_config.jpg) |
+| ![Scan](images/screenshot_scan.jpg) | ![Config](images/screenshot_config.jpg) |
 
 ## 🚀 安裝與使用說明
 
