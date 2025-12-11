@@ -92,7 +92,6 @@
     </ScrollView>
 
     <!-- 關於我們按鈕 (固定在底部) -->
-    <!-- 這就是您缺少的 id: btnAbout -->
     <Button
         android:id="@+id/btnAbout"
         android:layout_width="match_parent"

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isScanning = false;
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    // UI 元件 (移除 etFreq, etName)
+    // UI 元件
     private TextView tvStatus;
     private Button btnScan, btnSave, btnDisconnect, btnAbout;
     private EditText etId; // 這個是用來輸入字串 ID 的
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         btnScan.setOnClickListener(v -> startScan());
         btnSave.setOnClickListener(v -> saveConfig());
         btnDisconnect.setOnClickListener(v -> disconnect());
-        // [新增] 關於我們按鈕事件
+        // 關於我們按鈕
         btnAbout.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
@@ -132,24 +132,23 @@ public class MainActivity extends AppCompatActivity {
             BluetoothDevice device = result.getDevice();
 
             // 1. 安全取得名字 (防止 NPE)
-            // 如果 device.getName() 是 null，我們就把它當作 "Unknown Device"
+            // 如果 device.getName() 是 null，就把它當作 "Unknown Device"
             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             String name = device.getName();
             String safeName = (name != null) ? name : "Unknown";
 
-            // 2. [除錯] 印出所有掃到的東西 (包含無名氏)
-            Log.d("BLE_DEBUG", "Scanned: " + safeName + " [" + device.getAddress() + "]");
+            //Log.d("BLE_DEBUG", "Scanned: " + safeName + " [" + device.getAddress() + "]");
 
-            // 3. 過濾邏輯 (放寬標準)
+            // 3. 過濾邏輯
             // 只要名字有對到，或者 (名字是空的 但 UUID 對) 就顯示
             boolean isTarget = false;
 
             if (name != null && name.startsWith("LoRa_Node_")) {
                 isTarget = true;
             }
-            // 額外檢查：如果名字是 null，檢查 ScanRecord 裡的 UUID (比較穩)
+            // 額外檢查：如果名字是 null，檢查 ScanRecord 裡的 UUID
             else if (result.getScanRecord() != null && result.getScanRecord().getServiceUuids() != null) {
                 if (result.getScanRecord().getServiceUuids().contains(new android.os.ParcelUuid(SERVICE_UUID))) {
                     isTarget = true;
@@ -169,8 +168,6 @@ public class MainActivity extends AppCompatActivity {
             deviceNameList.add(displayName + "\n" + device.getAddress());
 
             // 更新 UI
-            // 注意：ScanCallback 不一定在主執行緒，更新 UI 要小心，
-            // 但 ArrayAdapter 內部通常有處理，或是前面 showDeviceSelectionDialog 會重讀 list
             Log.i("BLE", "Found Target: " + displayName);
         }
     }
@@ -277,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
     private void parseJsonAndFillUI(String json) {
         try {
             JSONObject obj = new JSONObject(json);
-            // 只讀取 id 欄位 (現在是字串)
+            // 只讀取 id 欄位 (字串)
             etId.setText(obj.getString("id"));
         } catch (JSONException e) {
             updateStatus("JSON 解析失敗");
