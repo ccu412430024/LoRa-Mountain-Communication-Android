@@ -22,8 +22,9 @@
 * **最低版本需求**：Android 12.0 (API Level 31) 以上
 
 ## 📸 應用截圖 (Screenshots)
-
-[Scan](images/screenshot_scan.png)
+| 裝置掃描 | 參數設定頁面 |
+|:---:|:---:|
+| ![Scan](images/screenshot_scan.png) | ![Config](images/screenshot_config.jpg) |
 
 ## 🚀 安裝與使用說明
 
